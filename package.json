@@ -6,7 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:build": "docker build -t number-game:local .",
+    "docker:run": "docker run -p 3000:3000 number-game:local",
+    "k8s:deploy": "./scripts/deploy.sh deploy-stable",
+    "k8s:canary": "./scripts/deploy.sh deploy-canary",
+    "k8s:status": "./scripts/deploy.sh status",
+    "test:local": "./scripts/test-local.sh"
   },
   "dependencies": {
     "react": "^19.0.0",
