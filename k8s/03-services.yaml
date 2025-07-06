@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: number-game-service
+  namespace: number-game
+  labels:
+    app: number-guessing-game
+spec:
+  selector:
+    app: number-guessing-game
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: http
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: number-game-stable
+  namespace: number-game
+  labels:
+    app: number-guessing-game
+    version: stable
+spec:
+  selector:
+    app: number-guessing-game
+    version: stable
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: http
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: number-game-canary
+  namespace: number-game
+  labels:
+    app: number-guessing-game
+    version: canary
+spec:
+  selector:
+    app: number-guessing-game
+    version: canary
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: http
+  type: ClusterIP
