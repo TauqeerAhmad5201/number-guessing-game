@@ -93,10 +93,6 @@ temp/
 *.bz2
 *.xz
 
-# Docker
-.dockerignore
-Dockerfile*
-docker-compose*
 
 # Kubernetes secrets and configs (keep manifests)
 secrets/
