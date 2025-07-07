@@ -1,11 +1,45 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import NumberGuessingGame from '@/components/NumberGuessingGame';
 import NumberGuessingGameCanary from '@/components/NumberGuessingGameCanary';
 
-// Check if running in canary mode based on environment variable
-const isCanaryVersion = process.env.APP_VERSION === 'canary';
+interface VersionInfo {
+  version: string;
+  isCanary: boolean;
+  timestamp: string;
+}
 
 export default function Home() {
-  if (isCanaryVersion) {
+  const [versionInfo, setVersionInfo] = useState<VersionInfo | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/version')
+      .then(res => res.json())
+      .then((data: VersionInfo) => {
+        setVersionInfo(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        // Fallback to stable version if API fails
+        setVersionInfo({ version: 'stable', isCanary: false, timestamp: new Date().toISOString() });
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (versionInfo?.isCanary) {
     // Canary version with enhanced UI
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900 dark:to-indigo-900 relative overflow-hidden">
@@ -84,7 +118,7 @@ export default function Home() {
           </p>
           <div className="mt-4 inline-block bg-green-100 dark:bg-green-900 px-4 py-2 rounded-full">
             <span className="text-sm font-medium text-green-800 dark:text-green-200">
-              Version: Stable 🚀
+              Version: {versionInfo?.version === 'canary' ? 'Canary 🚧' : 'Stable 🚀'}
             </span>
           </div>
         </div>
