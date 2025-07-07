@@ -5,9 +5,7 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['@heroicons/react'],
   },
-  env: {
-    APP_VERSION: process.env.APP_VERSION || 'stable',
-  },
+  // Remove env config to allow runtime environment variables
 };
 
 export default nextConfig;
