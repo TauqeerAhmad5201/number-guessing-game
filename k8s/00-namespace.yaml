@@ -15,12 +15,12 @@ data:
   NODE_ENV: "production"
   APP_VERSION: "stable"
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: game-secrets
-  namespace: number-game
-type: Opaque
-data:
-  # Add any secrets here (base64 encoded)
-  # Example: api-key: <base64-encoded-value>
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: game-secrets
+#   namespace: number-game
+# type: Opaque
+# # data:
+# #   # Add any secrets here (base64 encoded)
+# #   # Example: api-key: <base64-encoded-value>
