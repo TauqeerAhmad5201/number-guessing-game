@@ -12,6 +12,9 @@
     "k8s:deploy": "./scripts/deploy.sh deploy-stable",
     "k8s:canary": "./scripts/deploy.sh deploy-canary",
     "k8s:status": "./scripts/deploy.sh status",
+    "k8s:local": "./scripts/local-k8s-test.sh setup",
+    "k8s:test": "./scripts/local-k8s-test.sh test",
+    "k8s:cleanup": "./scripts/local-k8s-test.sh cleanup",
     "test:local": "./scripts/test-local.sh"
   },
   "dependencies": {
