@@ -22,6 +22,7 @@ spec:
       containers:
       - name: number-game
         image: number-game:stable
+        imagePullPolicy: Never
         ports:
         - containerPort: 3000
           name: http
@@ -61,5 +62,4 @@ spec:
           timeoutSeconds: 5
           successThreshold: 1
           failureThreshold: 3
-      imagePullPolicy: Always
       restartPolicy: Always
